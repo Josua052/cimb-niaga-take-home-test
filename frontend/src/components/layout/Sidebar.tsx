@@ -16,7 +16,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       {isOpen && (
         <div
           data-testid="sidebar-backdrop"
-          className="fixed inset-0 z-40 bg-gray-900/50 backdrop-blur-xs lg:hidden transition-opacity"
+          className="fixed inset-0 z-40 bg-slate-950/60 backdrop-blur-xs lg:hidden transition-opacity duration-300"
           onClick={onClose}
           aria-hidden="true"
         />
@@ -26,21 +26,21 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       <aside
         data-testid="sidebar-container"
         className={cn(
-          'fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0',
+          'fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 text-white flex flex-col transition-transform duration-300 ease-in-out lg:translate-x-0 shadow-xl lg:shadow-none',
           isOpen ? 'translate-x-0' : '-translate-x-full'
         )}
       >
         {/* Brand Header */}
-        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800">
+        <div className="h-16 flex items-center justify-between px-6 border-b border-slate-800/80">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-lg bg-red-600 flex items-center justify-center text-white shadow-md">
+            <div className="w-9 h-9 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md">
               <ShieldCheck className="w-5 h-5" />
             </div>
             <div>
               <span className="font-bold text-base tracking-tight text-white block leading-tight">
                 CIMB NIAGA
               </span>
-              <span className="text-xs text-slate-400 block leading-tight">
+              <span className="text-xs text-slate-400 block leading-tight font-medium mt-0.5">
                 Supervisor Portal
               </span>
             </div>
@@ -49,7 +49,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           <button
             type="button"
             onClick={onClose}
-            className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors"
+            className="lg:hidden p-1.5 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
             aria-label="Tutup navigasi"
           >
             <X className="w-5 h-5" />
@@ -57,14 +57,14 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </div>
 
         {/* Navigation Menu */}
-        <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
+        <nav className="flex-1 px-3 py-5 space-y-1.5 overflow-y-auto">
           <div className="px-3 pb-2 text-[11px] font-semibold text-slate-400 uppercase tracking-wider">
             Menu Utama
           </div>
 
           <button
             type="button"
-            className="flex items-center gap-3 w-full px-3 py-2.5 rounded-lg text-sm font-medium bg-red-600 text-white shadow-sm transition-colors text-left"
+            className="flex items-center gap-3 w-full px-3.5 py-2.5 rounded-xl text-sm font-semibold bg-red-600 text-white shadow-md transition-all text-left"
           >
             <Headphones className="w-5 h-5 shrink-0" />
             <span>Call Monitoring</span>
@@ -72,10 +72,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
         </nav>
 
         {/* Footer Info */}
-        <div className="p-4 border-t border-slate-800">
-          <div className="bg-slate-800/60 rounded-lg p-3 text-xs text-slate-400">
-            <p className="font-medium text-slate-300 mb-0.5">Call Monitoring v1.0</p>
-            <p className="text-[11px] text-slate-500">THT-MON-US-001</p>
+        <div className="p-4 border-t border-slate-800/80">
+          <div className="bg-slate-800/60 rounded-xl p-3 text-xs text-slate-400 border border-slate-800">
+            <p className="font-semibold text-slate-200 mb-0.5">Call Monitoring v1.0</p>
+            <p className="text-[11px] text-slate-500 font-mono">THT-MON-US-001</p>
           </div>
         </div>
       </aside>

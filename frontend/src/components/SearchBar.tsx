@@ -28,7 +28,7 @@ export function SearchBar({
 
   return (
     <div className={cn('relative flex-1 min-w-[220px]', className)}>
-      <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none text-gray-400">
+      <div className="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
         <Search className="w-4 h-4" />
       </div>
 
@@ -38,7 +38,7 @@ export function SearchBar({
         onChange={handleChange}
         placeholder={placeholder}
         aria-label="Pencarian kata kunci"
-        className="w-full pl-9 pr-8 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors shadow-2xs"
+        className="w-full pl-10 pr-9 py-2.5 bg-white border border-gray-300 rounded-xl text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all shadow-2xs"
       />
 
       {value && (
@@ -46,7 +46,7 @@ export function SearchBar({
           type="button"
           onClick={handleClear}
           aria-label="Hapus teks pencarian"
-          className="absolute inset-y-0 right-0 pr-2.5 flex items-center text-gray-400 hover:text-gray-600 transition-colors"
+          className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-400 hover:text-gray-600 focus:outline-none transition-colors cursor-pointer"
         >
           <X className="w-4 h-4" />
         </button>

@@ -1,4 +1,3 @@
-import { cn } from '@/utils/cn';
 import { ArrowUp, ArrowDown, ArrowUpDown, AlertCircle, RefreshCw, Inbox } from 'lucide-react';
 import { PAGE_SIZE } from '@/constants/monitoring';
 import { formatTimestamp } from '@/utils/format';
@@ -52,34 +51,33 @@ export function CallMonitoringTable({
         <ArrowDown className="w-3.5 h-3.5 text-red-600 shrink-0" data-testid="sort-desc" />
       );
     }
-    return <ArrowUpDown className="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-600 shrink-0" data-testid="sort-neutral" />;
+    return <ArrowUpDown className="w-3.5 h-3.5 text-gray-400 group-hover:text-gray-600 shrink-0 transition-colors" data-testid="sort-neutral" />;
   };
 
   return (
-    <div className="w-full overflow-hidden rounded-xl border border-gray-200 bg-white shadow-2xs">
+    <div className="w-full overflow-hidden rounded-xl border border-gray-200/90 bg-white shadow-2xs">
       <div className="overflow-x-auto">
         <table className="w-full text-left border-collapse" data-testid="call-monitoring-table">
           {/* Table Header */}
           <thead>
-            <tr className="bg-gray-50/80 border-b border-gray-200">
+            <tr className="bg-slate-50 border-b border-gray-200">
               {COLUMNS.map((col) => (
                 <th
                   key={col.key}
                   scope="col"
-                  className={cn(
-                    "px-4 py-3.5 text-xs font-semibold uppercase tracking-wider text-gray-600",
-                    {
-                      'text-center': col.align === 'center',
-                      'text-right': col.align === 'right',
-                      'text-left': col.align === 'left' || !col.align,
-                    }
-                  )}
+                  className={`px-4 py-3.5 text-xs font-semibold uppercase tracking-wider text-gray-600 ${
+                    col.align === 'center'
+                      ? 'text-center'
+                      : col.align === 'right'
+                      ? 'text-right'
+                      : 'text-left'
+                  }`}
                 >
                   {col.sortable ? (
                     <button
                       type="button"
                       onClick={() => onSort(col.key)}
-                      className="group inline-flex items-center justify-inherit gap-1.5 hover:text-gray-900 focus:outline-none focus:text-gray-900 font-semibold cursor-pointer"
+                      className="group inline-flex items-center gap-1.5 hover:text-gray-900 focus:outline-none focus:text-gray-900 font-semibold cursor-pointer transition-colors"
                       aria-label={`Urutkan berdasarkan ${col.label}`}
                     >
                       <span>{col.label}</span>
@@ -122,17 +120,17 @@ export function CallMonitoringTable({
             ) : error ? (
               // 2. Error State
               <tr>
-                <td colSpan={COLUMNS.length} className="px-4 py-12 text-center" data-testid="table-error-state">
+                <td colSpan={COLUMNS.length} className="px-4 py-14 text-center" data-testid="table-error-state">
                   <div className="max-w-sm mx-auto flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-red-100 text-red-600 flex items-center justify-center mb-3">
+                    <div className="w-11 h-11 rounded-full bg-red-50 border border-red-100 text-red-600 flex items-center justify-center mb-3.5 shadow-2xs">
                       <AlertCircle className="w-5 h-5" />
                     </div>
-                    <p className="text-sm font-semibold text-gray-900 mb-1">Gagal Memuat Data</p>
-                    <p className="text-xs text-gray-500 mb-4">{error}</p>
+                    <p className="text-sm font-bold text-gray-900 mb-1">Gagal Memuat Data</p>
+                    <p className="text-xs text-gray-500 mb-5 leading-relaxed">{error}</p>
                     <button
                       type="button"
                       onClick={onRetry}
-                      className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-white bg-red-600 hover:bg-red-700 rounded-lg transition-colors shadow-2xs cursor-pointer"
+                      className="inline-flex items-center gap-2 px-4 py-2 text-xs font-semibold text-white bg-red-600 hover:bg-red-700 active:scale-98 rounded-lg transition-all shadow-2xs cursor-pointer"
                     >
                       <RefreshCw className="w-3.5 h-3.5" />
                       <span>Coba Lagi</span>
@@ -143,17 +141,17 @@ export function CallMonitoringTable({
             ) : records.length === 0 ? (
               // 3. Empty State
               <tr>
-                <td colSpan={COLUMNS.length} className="px-4 py-12 text-center" data-testid="table-empty-state">
+                <td colSpan={COLUMNS.length} className="px-4 py-14 text-center" data-testid="table-empty-state">
                   <div className="max-w-sm mx-auto flex flex-col items-center">
-                    <div className="w-10 h-10 rounded-full bg-gray-100 text-gray-400 flex items-center justify-center mb-3">
+                    <div className="w-11 h-11 rounded-full bg-gray-100 border border-gray-200 text-gray-400 flex items-center justify-center mb-3.5 shadow-2xs">
                       <Inbox className="w-5 h-5" />
                     </div>
-                    <p className="text-sm font-semibold text-gray-800 mb-1">
+                    <p className="text-sm font-bold text-gray-800 mb-1">
                       {hasActiveFilter
                         ? 'Tidak ada data yang cocok dengan filter yang dipilih.'
                         : 'Belum ada data monitoring.'}
                     </p>
-                    <p className="text-xs text-gray-400">
+                    <p className="text-xs text-gray-400 leading-relaxed">
                       {hasActiveFilter
                         ? 'Coba sesuaikan kata kunci atau rentang periode tanggal Anda.'
                         : 'Data panggilan akan otomatis ditampilkan saat tersedia di sistem.'}
@@ -167,12 +165,12 @@ export function CallMonitoringTable({
                 <tr
                   key={record.id}
                   data-testid="monitoring-row"
-                  className="hover:bg-gray-50/80 transition-colors"
+                  className="hover:bg-slate-50/75 transition-colors"
                 >
                   <td className="px-4 py-3.5 text-center text-xs text-gray-500 font-medium">
                     {record.no}
                   </td>
-                  <td className="px-4 py-3.5 font-mono text-xs font-semibold text-gray-900">
+                  <td className="px-4 py-3.5 font-mono text-xs font-semibold text-gray-900 tracking-tight">
                     {record.callId}
                   </td>
                   <td className="px-4 py-3.5 text-xs text-gray-600 whitespace-nowrap">

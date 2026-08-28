@@ -53,10 +53,10 @@ export function PeriodFilter({
   const hasPeriod = Boolean(startPeriod || endPeriod);
 
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <div className="flex items-center gap-1.5 bg-white border border-gray-300 rounded-lg px-2.5 py-1.5 shadow-2xs">
+    <div className="flex items-center gap-1.5 w-full sm:w-auto">
+      <div className="flex flex-1 sm:flex-initial items-center gap-2 bg-white border border-gray-300 rounded-xl px-3 py-2 shadow-2xs hover:border-gray-400 focus-within:border-red-500 focus-within:ring-2 focus-within:ring-red-500/20 transition-all">
         <Calendar className="w-4 h-4 text-gray-400 shrink-0" />
-        <div className="flex items-center gap-1.5 text-xs text-gray-600">
+        <div className="flex items-center gap-1.5 text-xs text-gray-600 w-full justify-between sm:justify-start">
           <input
             type="date"
             value={startPeriod}
@@ -64,9 +64,9 @@ export function PeriodFilter({
             max={endPeriod || maxDate}
             onChange={handleStartChange}
             aria-label="Tanggal Mulai Periode"
-            className="text-xs text-gray-800 bg-transparent focus:outline-none focus:ring-1 focus:ring-red-500 rounded px-1 py-0.5"
+            className="text-xs text-gray-800 bg-transparent focus:outline-none rounded px-1 py-0.5 cursor-pointer font-medium"
           />
-          <span className="text-gray-400 font-medium">-</span>
+          <span className="text-gray-400 font-semibold px-0.5">-</span>
           <input
             type="date"
             value={endPeriod}
@@ -74,7 +74,7 @@ export function PeriodFilter({
             max={maxDate}
             onChange={handleEndChange}
             aria-label="Tanggal Akhir Periode"
-            className="text-xs text-gray-800 bg-transparent focus:outline-none focus:ring-1 focus:ring-red-500 rounded px-1 py-0.5"
+            className="text-xs text-gray-800 bg-transparent focus:outline-none rounded px-1 py-0.5 cursor-pointer font-medium"
           />
         </div>
       </div>
@@ -84,7 +84,7 @@ export function PeriodFilter({
           type="button"
           onClick={handleResetPeriod}
           aria-label="Reset Periode Tanggal"
-          className="p-2 text-gray-400 hover:text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+          className="p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-200/60 rounded-lg transition-colors cursor-pointer shrink-0"
           title="Hapus filter periode"
         >
           <RotateCcw className="w-3.5 h-3.5" />

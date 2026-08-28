@@ -45,7 +45,7 @@ export function Pagination({
     <nav
       data-testid="pagination-container"
       aria-label="Navigasi Halaman"
-      className="flex flex-col sm:flex-row items-center justify-between gap-4 px-2 py-3 bg-white"
+      className="flex flex-col sm:flex-row items-center justify-between gap-3.5 px-2 py-3 bg-white"
     >
       {/* Total records summary */}
       <div className="text-xs text-gray-500 order-2 sm:order-1">
@@ -62,21 +62,21 @@ export function Pagination({
       </div>
 
       {/* Navigation Controls */}
-      <div className="flex items-center gap-3 order-1 sm:order-2">
+      <div className="flex items-center gap-2 sm:gap-3 order-1 sm:order-2">
         {/* Previous Button */}
         <button
           type="button"
           onClick={handlePrevious}
           disabled={isFirstPage || isLoading}
           aria-label="Halaman Sebelumnya"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white transition-colors shadow-2xs cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400 active:scale-98 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300 transition-all shadow-2xs cursor-pointer"
         >
           <ChevronLeft className="w-4 h-4" />
           <span>Previous</span>
         </button>
 
         {/* Page indicator info */}
-        <div className="text-xs font-medium text-gray-700 px-1" data-testid="page-indicator">
+        <div className="text-xs font-medium text-gray-600 px-1.5" data-testid="page-indicator">
           Halaman <span className="font-bold text-gray-900">{displayCurrentPage}</span> dari{' '}
           <span className="font-bold text-gray-900">{displayTotalPages}</span>
         </div>
@@ -87,7 +87,7 @@ export function Pagination({
           onClick={handleNext}
           disabled={isLastPage || isLoading}
           aria-label="Halaman Berikutnya"
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-white transition-colors shadow-2xs cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg border border-gray-300 bg-white text-gray-700 hover:bg-gray-50 hover:border-gray-400 active:scale-98 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-white disabled:hover:border-gray-300 transition-all shadow-2xs cursor-pointer"
         >
           <span>Next</span>
           <ChevronRight className="w-4 h-4" />

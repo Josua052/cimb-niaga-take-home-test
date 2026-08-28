@@ -33,10 +33,10 @@ export function FilterToolbar({
   return (
     <div
       data-testid="filter-toolbar"
-      className="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-3 p-4 bg-gray-50/80 rounded-xl border border-gray-200"
+      className="flex flex-col xl:flex-row items-stretch xl:items-center justify-between gap-3.5 p-4 sm:p-4.5 bg-slate-50/80 rounded-xl border border-slate-200/80 shadow-2xs"
     >
       {/* Search Input */}
-      <div className="flex-1">
+      <div className="flex-1 w-full">
         <SearchBar
           value={filter.keyword}
           onChange={onKeywordChange}
@@ -44,8 +44,8 @@ export function FilterToolbar({
         />
       </div>
 
-      {/* Filters Group */}
-      <div className="flex flex-wrap items-center gap-3">
+      {/* Filters & Actions Group */}
+      <div className="flex flex-col sm:flex-row flex-wrap items-stretch sm:items-center gap-3">
         <PeriodFilter
           startPeriod={filter.startPeriod}
           endPeriod={filter.endPeriod}
@@ -63,7 +63,7 @@ export function FilterToolbar({
             type="button"
             onClick={onResetAll}
             aria-label="Reset Semua Filter"
-            className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-medium text-red-600 bg-red-50 hover:bg-red-100 border border-red-200 rounded-lg transition-colors shadow-2xs cursor-pointer"
+            className="inline-flex items-center justify-center gap-1.5 px-3.5 py-2.5 text-xs font-semibold text-red-600 bg-red-50 hover:bg-red-100/80 border border-red-200 rounded-xl transition-all shadow-2xs cursor-pointer active:scale-98"
           >
             <RotateCcw className="w-3.5 h-3.5" />
             <span>Reset Filter</span>

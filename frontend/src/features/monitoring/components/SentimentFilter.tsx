@@ -16,12 +16,12 @@ export function SentimentFilter({ value, onChange }: SentimentFilterProps) {
   };
 
   return (
-    <div className="min-w-[150px]">
+    <div className="w-full sm:w-auto min-w-[160px]">
       <select
         value={value || ''}
         onChange={handleChange}
         aria-label="Filter Kategori Sentimen"
-        className="w-full px-3 py-2 bg-white border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-red-500 focus:border-red-500 transition-colors shadow-2xs cursor-pointer"
+        className="w-full px-3.5 py-2.5 bg-white border border-gray-300 rounded-xl text-sm text-gray-800 hover:border-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 transition-all shadow-2xs cursor-pointer font-medium"
       >
         <option value="">Semua Sentimen</option>
         <option value={SENTIMENT_CATEGORY.BELOW_70}>Di bawah 70%</option>
