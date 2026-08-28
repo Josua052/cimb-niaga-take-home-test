@@ -151,6 +151,43 @@ describe('useCallMonitoring Hook', () => {
     });
   });
 
+  it('atomically resets all filters and page to 0 when handleResetFilters is called', async () => {
+    vi.spyOn(service, 'fetchCallMonitoring').mockResolvedValue(mockSuccessResponse);
+
+    const { result } = renderHook(() => useCallMonitoring());
+
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
+
+    act(() => {
+      result.current.handleKeywordChange('Budi');
+      result.current.handlePeriodChange('2026-06-01', '2026-06-30');
+      result.current.handleSentimentChange('BELOW_70');
+      result.current.handlePageChange(2);
+    });
+
+    await waitFor(() => {
+      expect(result.current.currentPage).toBe(2);
+      expect(result.current.filter.keyword).toBe('Budi');
+    });
+
+    act(() => {
+      result.current.handleResetFilters();
+    });
+
+    await waitFor(() => {
+      expect(result.current.currentPage).toBe(0);
+      expect(result.current.filter).toEqual({
+        keyword: '',
+        startPeriod: '',
+        endPeriod: '',
+        sentimentCategory: undefined,
+      });
+      expect(result.current.isLoading).toBe(false);
+    });
+  });
+
   it('toggles sort direction when sorting on the same column and resets page', async () => {
     vi.spyOn(service, 'fetchCallMonitoring').mockResolvedValue(mockSuccessResponse);
 
@@ -229,8 +266,8 @@ describe('useCallMonitoring Hook', () => {
     expect(result.current.error).toBe('Network error');
     expect(result.current.records).toEqual([]);
 
-    await act(async () => {
-      await result.current.refetch();
+    act(() => {
+      result.current.refetch();
     });
 
     await waitFor(() => {

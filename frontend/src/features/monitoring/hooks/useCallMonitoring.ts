@@ -33,6 +33,7 @@ export interface UseCallMonitoringReturn {
   handleSentimentChange: (category?: SentimentCategory) => void;
   handleSort: (column: string) => void;
   handlePageChange: (newPage: number) => void;
+  handleResetFilters: () => void;
   refetch: () => void;
 }
 
@@ -160,6 +161,16 @@ export function useCallMonitoring(): UseCallMonitoringReturn {
     setCurrentPage(newPage);
   }, []);
 
+  const handleResetFilters = useCallback(() => {
+    setFilter({
+      keyword: '',
+      startPeriod: '',
+      endPeriod: '',
+      sentimentCategory: undefined,
+    });
+    setCurrentPage(0);
+  }, []);
+
   const refetch = useCallback(() => {
     setRefetchKey((prev) => prev + 1);
   }, []);
@@ -177,6 +188,7 @@ export function useCallMonitoring(): UseCallMonitoringReturn {
     handleSentimentChange,
     handleSort,
     handlePageChange,
+    handleResetFilters,
     refetch,
   };
 }
