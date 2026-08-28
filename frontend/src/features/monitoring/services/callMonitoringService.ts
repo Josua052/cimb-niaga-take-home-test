@@ -39,10 +39,11 @@ export function extractErrorMessage(error: unknown): string {
 }
 
 /**
- * Fetches paginated call monitoring records from the backend API.
+ * Fetches paginated call monitoring records from the backend API with cancellation support.
  */
 export async function fetchCallMonitoring(
-  params: CallMonitoringParams = {}
+  params: CallMonitoringParams = {},
+  signal?: AbortSignal
 ): Promise<PagedResponse<CallMonitoringRecord>> {
   try {
     const sanitizedParams = cleanParams(params);
@@ -50,10 +51,14 @@ export async function fetchCallMonitoring(
       '/call-monitoring',
       {
         params: sanitizedParams,
+        signal,
       }
     );
     return response.data;
   } catch (error) {
+    if (axios.isCancel(error)) {
+      throw error;
+    }
     const message = extractErrorMessage(error);
     throw new Error(message);
   }

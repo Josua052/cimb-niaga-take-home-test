@@ -64,7 +64,7 @@ describe('callMonitoringService', () => {
   });
 
   describe('fetchCallMonitoring', () => {
-    it('successfully fetches paginated call monitoring data from API', async () => {
+    it('successfully fetches paginated call monitoring data from API with AbortSignal', async () => {
       const mockData: PagedResponse<CallMonitoringRecord> = {
         data: [
           {
@@ -85,15 +85,19 @@ describe('callMonitoringService', () => {
         },
       };
 
+      const controller = new AbortController();
       const getSpy = vi.spyOn(apiClient, 'get').mockResolvedValueOnce({
         data: mockData,
       });
 
-      const response = await fetchCallMonitoring({
-        keyword: 'Budi',
-        page: 0,
-        size: 5,
-      });
+      const response = await fetchCallMonitoring(
+        {
+          keyword: 'Budi',
+          page: 0,
+          size: 5,
+        },
+        controller.signal
+      );
 
       expect(getSpy).toHaveBeenCalledWith('/call-monitoring', {
         params: {
@@ -101,6 +105,7 @@ describe('callMonitoringService', () => {
           page: 0,
           size: 5,
         },
+        signal: controller.signal,
       });
       expect(response).toEqual(mockData);
       expect(response.data).toHaveLength(1);
