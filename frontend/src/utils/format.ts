@@ -16,6 +16,16 @@ export function formatTimestamp(iso: string): string {
 }
 
 /**
+ * Formats a Date object to local calendar date string (YYYY-MM-DD) without UTC timezone drift.
+ */
+export function formatDateToLocalISO(date: Date): string {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
+}
+
+/**
  * Formats a sentiment numeric score into percentage string.
  */
 export function formatSentiment(score: number): string {
